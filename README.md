@@ -1,3 +1,5 @@
+## Requerimiento 3: CRUD a los modelos
+
 # Proyecto Inmuebles
 Este proyecto es un sitio web desarrollado con Django, diseñado para gestionar y visualizar viviendas disponibles para arriendo. Es parte de un desafío evaluado que conecta Django a una base de datos PostgreSQL, permitiendo realizar operaciones CRUD y definiendo relaciones entre los datos.
 
