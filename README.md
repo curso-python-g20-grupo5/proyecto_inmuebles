@@ -1,5 +1,3 @@
-## Requerimiento 3: CRUD a los modelos
-
 # Proyecto Inmuebles
 Este proyecto es un sitio web desarrollado con Django, diseñado para gestionar y visualizar viviendas disponibles para arriendo. Es parte de un desafío evaluado que conecta Django a una base de datos PostgreSQL, permitiendo realizar operaciones CRUD y definiendo relaciones entre los datos.
 
@@ -10,7 +8,20 @@ Este proyecto es un sitio web desarrollado con Django, diseñado para gestionar 
 3. Dependencias necesarias:
        - Django
        - psycopg2-binary (para conectar Django con PostgreSQL)
-3. Aplicación Django: Configuración inicial del proyecto y sus aplicaciones.
+4. Aplicación Django: Configuración inicial del proyecto y sus aplicaciones.
+
+## Características
+
+* Base de Datos Relacional:
+  - Modelado de datos utilizando los conceptos de claves primarias y foráneas.
+  - Conexión y manejo de datos en PostgreSQL.
+* Operaciones CRUD:
+  - Crear: Inserción de nuevos inmuebles.
+  - Leer: Listado de inmuebles disponibles.
+  - Actualizar: Modificación de registros existentes.
+  - Borrar: Eliminación de registros desde los modelos.
+* Configuración documentada:
+  - Todo el proceso de instalación, desarrollo y pruebas está documentado para facilitar la reproducción del entorno.
 
 ### Abre la shell de Django:
 
