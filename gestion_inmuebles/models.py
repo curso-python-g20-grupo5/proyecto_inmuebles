@@ -1,8 +1,15 @@
 from django.db import models
 
+class Region(models.Model):
+    nombre_region = models.CharField(max_length=100)
+    
+
+    def __str__(self):
+        return self.nombre_region
 
 class Comuna(models.Model):
     nombre = models.CharField(max_length=100)
+    nombre_region = models.ForeignKey(Region, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
@@ -16,7 +23,7 @@ class TipoInmueble(models.Model):
 
 
 class Direccion(models.Model):
-    direccion = models.CharField(max_length=200)
+    ubicacion = models.CharField(max_length=200)
     comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
 
     def __str__(self):
