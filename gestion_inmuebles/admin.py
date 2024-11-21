@@ -31,8 +31,14 @@ class CaracteristicasAdmin(admin.ModelAdmin):
 
 @admin.register(Inmueble)
 class InmuebleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre', 'direccion', 'tipo_inmueble', 'precio_mensual')
+    list_display = ('id', 'nombre', 'direccion', 'tipo_inmueble', 'precio_mensual', 'fecha_creacion', 'ultima_modificacion')
     search_fields = ('nombre', 'descripcion')
-    list_filter = ('tipo_inmueble', 'direccion__comuna')  # Filtro por tipo y comuna
+    list_filter = ('tipo_inmueble', 'direccion__comuna')
     ordering = ('precio_mensual',)
+    readonly_fields = ('fecha_creacion', 'ultima_modificacion')
+
+    def save_model(self, request, obj, form, change):
+        if change:
+            obj.ultima_modificacion = now()
+        super().save_model(request, obj, form, change)
 
