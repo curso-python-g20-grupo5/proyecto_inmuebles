@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 class Region(models.Model):
     nombre_region = models.CharField(max_length=100)
@@ -27,7 +28,7 @@ class Direccion(models.Model):
     comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.direccion
+        return self.ubicacion
 
 
 class Caracteristicas(models.Model):
@@ -45,6 +46,8 @@ class Inmueble(models.Model):
     caracteristicas = models.OneToOneField(Caracteristicas, on_delete=models.CASCADE)
     tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.CASCADE)
     precio_mensual = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_creacion = models.DateTimeField(default=now, editable=False)
+    ultima_modificacion = models.DateTimeField(default=now)
 
     def __str__(self):
         return self.nombre
