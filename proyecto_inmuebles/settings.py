@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from dotenv import load_dotenv
 
+
 # Cargar las variables de entorno desde el archivo .env
 from pathlib import Path
 
