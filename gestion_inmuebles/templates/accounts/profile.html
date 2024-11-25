@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Perfil - RentEasy{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <div class="container">
+        <h1 class="profile-title">Mi Perfil</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="profile-card text-center">
+                <img src="{% static 'images/default-avatar.png' %}" alt="Avatar" class="profile-avatar">
+                <h3 class="h4 mb-2">{{ user.get_full_name|default:user.username }}</h3>
+                <p class="text-muted mb-3">{{ user.email }}</p>
+                <p class="mb-1">{{ user.profile.bio|default:"No hay biografía disponible." }}</p>
+                <p><strong>Tipo de usuario:</strong> {{ user.profile.get_user_type_display }}</p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="profile-card mb-4">
+                <h2 class="h4 mb-4">Editar Perfil</h2>
+                <form method="post" class="edit-form">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {% if field.name == 'bio' %}
+                                <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control" rows="4">{{ field.value|default:'' }}</textarea>
+                            {% elif field.name == 'user_type' %}
+                                <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select">
+                                    {% for value, label in field.field.choices %}
+                                        <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control" value="{{ field.value|default:'' }}">
+                            {% endif %}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
