@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Iniciar sesión - G3 Propiedades{% endblock %}
+
+
+{% block content %}
+<div class="auth-container">
+    <div class="container">
+        <div class="row auth-card">
+            <div class="col-lg-6 auth-sidebar d-none d-lg-block">
+                <div class="floating-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+                <div>
+                    <h1 class="mb-4">Bienvenido de vuelta</h1>
+                    <p class="mb-5">Encuentra tu hogar ideal con G3 Propiedades. Explora nuestras opciones de arriendo y venta.</p>
+                </div>
+                <ul class="feature-list mt-5">
+                    <li>Amplia selección de propiedades</li>
+                    <li>Proceso de arriendo simplificado</li>
+                    <li>Soporte personalizado</li>
+                    <li>Información detallada de cada propiedad</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 auth-form">
+                <h2 class="mb-4">Iniciar sesión</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="username" name="username" required>
+                        {% if form.username.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.username.errors|join:", " }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control {% if form.password.errors %}is-invalid{% endif %}" id="password" name="password" required>
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.password.errors|join:", " }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Iniciar sesión</button>
+                </form>
+                <p class="text-center text-muted">
+                    ¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>
+                </p>
+                <div class="text-center text-muted mt-4">O inicia sesión con</div>
+                <div class="social-login">
+                    <button class="social-btn" aria-label="Iniciar sesión con GitHub">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#333">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </button>
+                    <button class="social-btn" aria-label="Iniciar sesión con Google">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#333">
+                            <path d="M23.271 9.419c0-1.341-.138-2.3-.389-3.305H12v5.618h6.61c-.31 1.536-1.114 2.788-2.318 3.633v2.214h3.726C21.455 16.45 23.271 13.24 23.271 9.419z"/>
+                            <path d="M12 24c3.24 0 5.956-1.075 7.961-2.918l-3.726-2.214c-1.007.618-2.318 1.002-4.235 1.002-3.24 0-5.956-2.151-6.97-5.132H.714v2.259C3.138 21.23 7.471 24 12 24z"/>
+                            <path d="M5.03 14.738c-.389-1.075-.389-2.259-.389-3.305 0-1.075.138-2.259.389-3.305V5.869H.714C.138 7.253 0 8.637 0 10c0 1.364.138 2.747.714 4.131l4.316-2.82z"/>
+                            <path d="M12 4.131c1.783 0 3.378.618 4.649 1.746l3.305-3.305C17.956 1.075 15.24 0 12 0 7.471 0 3.138 2.77.714 6.935l4.316 2.82C6.044 6.281 8.76 4.131 12 4.131z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
