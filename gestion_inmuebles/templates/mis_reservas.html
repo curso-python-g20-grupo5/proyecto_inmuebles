@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mis Reservas - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<style>
+    .reservas-header {
+        background-color: var(--primary-color);
+        padding: 4rem 0;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    .reservas-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .reserva-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .reserva-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .btn-cancel {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .btn-cancel:hover {
+        background-color: #e65c00;
+        border-color: #e65c00;
+        transform: translateY(-2px);
+    }
+    .reserva-status {
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .reserva-status .badge {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    .reserva-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        padding: 10px;
+    }
+    .reserva-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .reserva-dates {
+        font-size: 0.9rem;
+        color: var(--text-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reservas-header">
+    <div class="container">
+        <h1>Mis Reservas</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Mis Reservas</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for reserva in reservas %}
+            <div class="col">
+                <div class="reserva-card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">{{ reserva.inmueble.nombre }}</h5>
+                        <p class="reserva-dates mb-2">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            <strong>Inicio:</strong> {{ reserva.fecha_inicio|date:"d M, Y" }}
+                        </p>
+                        <p class="reserva-dates mb-3">
+                            <i class="bi bi-calendar-event-fill me-2"></i>
+                            <strong>Fin:</strong> {{ reserva.fecha_fin|date:"d M, Y" }}
+                        </p>
+                        <p class="reserva-status mb-3">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Estado: <span class="badge bg-light text-dark">{{ reserva.get_estado_display }}</span>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 pb-3">
+                        {% if reserva.estado == 'confirmada' %}
+                            <a href="{% url 'cancelar_reserva' reserva.id %}" class="btn btn-cancel w-100">
+                                <i class="bi bi-x-circle me-2"></i>Cancelar Reserva
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    No tienes reservas activas en este momento.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

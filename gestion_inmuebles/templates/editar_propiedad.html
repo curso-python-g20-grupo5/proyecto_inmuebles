@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Propiedad - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<style>
+    .edit-property-header {
+        background: var(--primary-color) ;
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    .edit-property-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('{% static "images/property-pattern.png" %}') repeat;
+        opacity: 0.1;
+    }
+    .edit-property-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+    .edit-property-form {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .form-label {
+        font-weight: 500;
+        color: var(--primary-color);
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: var(--secondary-color);
+        box-shadow: 0 0 0 0.2rem rgba(243, 112, 34, 0.25);
+    }
+    .btn-save {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+    .btn-save:hover {
+        background-color: #e65c00;
+        border-color: #e65c00;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255, 255, 255, 0.5);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="edit-property-header">
+    <div class="container">
+        <h1 class="edit-property-title">Editar Propiedad</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'mis_propiedades' %}" class="text-white">Mis Propiedades</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Editar Propiedad</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="edit-property-form">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row g-4">
+                {% for field in form %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}" class="form-label">
+                                {{ field.label }}
+                                {% if field.field.required %}
+                                    <span class="text-danger">*</span>
+                                {% endif %}
+                            </label>
+                            {% if field.name == 'descripcion' %}
+                                <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" rows="4">{{ field.value|default:'' }}</textarea>
+                            {% elif field.name == 'tipo_inmueble' or field.name == 'comuna' %}
+                                <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select {% if field.errors %}is-invalid{% endif %}">
+                                    {% for value, label in field.field.choices %}
+                                        <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" value="{{ field.value|default:'' }}">
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="form-text">{{ field.help_text }}</div>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-check-circle me-2"></i>Guardar Cambios
+                </button>
+                <a href="{% url 'mis_propiedades' %}" class="btn btn-outline-secondary btn-lg ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

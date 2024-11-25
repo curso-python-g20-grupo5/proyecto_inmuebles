@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Eliminar Propiedad - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<style>
+    .delete-property-header {
+        background:var(--primary-color);
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    .delete-property-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('{% static "images/property-pattern.png" %}') repeat;
+        opacity: 0.1;
+    }
+    .delete-property-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+    .delete-property-form {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-width: 600px;
+        margin: -100px auto 0;
+        position: relative;
+        z-index: 2;
+    }
+    .btn-delete {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .btn-delete:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+        transform: translateY(-2px);
+    }
+    .btn-cancel {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    .btn-cancel:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+        transform: translateY(-2px);
+    }
+    .property-info {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .breadcrumb {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 0.75rem 1rem;
+        border-radius: 0.25rem;
+    }
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255, 255, 255, 0.5);
+    }
+    .breadcrumb-item.active {
+        color: rgba(255, 255, 255, 0.9);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="delete-property-header">
+    <div class="container">
+        <h1 class="delete-property-title">Eliminar Propiedad</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'mis_propiedades' %}" class="text-white">Mis Propiedades</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Eliminar Propiedad</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="delete-property-form">
+        <h2 class="h4 mb-4">¿Estás seguro de que deseas eliminar esta propiedad?</h2>
+        <div class="property-info">
+            <p><strong>Nombre:</strong> {{ propiedad.nombre }}</p>
+            <p><strong>Descripción:</strong> {{ propiedad.descripcion|truncatewords:20 }}</p>
+            <p><strong>Precio:</strong> ${{ propiedad.precio_mensual }} / mes</p>
+        </div>
+        <p class="text-danger mb-4">Esta acción no se puede deshacer. Todos los datos asociados a esta propiedad serán eliminados permanentemente.</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'mis_propiedades' %}" class="btn btn-cancel">
+                    <i class="bi bi-x-circle me-2"></i>Cancelar
+                </a>
+                <button type="submit" class="btn btn-delete">
+                    <i class="bi bi-trash me-2"></i>Confirmar Eliminación
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

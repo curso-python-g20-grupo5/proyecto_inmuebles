@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Aceptar Arrendatario - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<style>
+  .accept-header {
+      background: var(--primary-color);
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+  }
+  .accept-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('{% static "images/property-pattern.png" %}') repeat;
+      opacity: 0.1;
+  }
+  .accept-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+  }
+  .accept-form {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .btn-accept {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+  }
+  .btn-accept:hover {
+      background-color: #e65c00;
+      border-color: #e65c00;
+      transform: translateY(-2px);
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+      color: rgba(255, 255, 255, 0.5);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="accept-header">
+  <div class="container">
+      <h1 class="accept-title">Aceptar Arrendatario</h1>
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'mis_propiedades' %}" class="text-white">Mis Propiedades</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Aceptar Arrendatario</li>
+          </ol>
+      </nav>
+  </div>
+</div>
+
+<div class="container my-4">
+  <div class="accept-form">
+      <h2 class="h4 mb-4">¿Estás seguro de que deseas aceptar a este arrendatario?</h2>
+      <div class="row mb-4">
+          <div class="col-md-6">
+              <p><strong>Propiedad:</strong> {{ reserva.inmueble.nombre }}</p>
+              <p><strong>Arrendatario:</strong> {{ reserva.arrendatario.get_full_name }}</p>
+          </div>
+          <div class="col-md-6">
+              <p><strong>Fecha de inicio:</strong> {{ reserva.fecha_inicio|date:"d F, Y" }}</p>
+              <p><strong>Fecha de fin:</strong> {{ reserva.fecha_fin|date:"d F, Y" }}</p>
+          </div>
+      </div>
+      <form method="post">
+          {% csrf_token %}
+          <div class="d-flex justify-content-end">
+              <a href="{% url 'mis_propiedades' %}" class="btn btn-outline-secondary me-2">Cancelar</a>
+              <button type="submit" class="btn btn-accept">Confirmar Aceptación</button>
+          </div>
+      </form>
+  </div>
+</div>
+{% endblock %}
+

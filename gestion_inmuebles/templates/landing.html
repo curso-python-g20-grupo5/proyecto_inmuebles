@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}G3 Propiedades - Tu plataforma inmobiliaria de confianza{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(rgba(28, 61, 91, 0.85), rgba(28, 61, 91, 0.85)),
+                    url('{% static "images/hero-bg.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        color: white;
+        position: relative;
+    }
+
+    .search-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        margin-top: 2rem;
+    }
+
+    /* Property Carousel */
+    .property-slide {
+        padding: 1rem;
+    }
+
+    /* Services Section */
+    .services-section {
+        background: var(--primary-color);
+        color: white;
+        padding: 5rem 0;
+    }
+
+    .service-card {
+        background: rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 2rem;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-5px);
+    }
+
+    /* Regions Section */
+    .region-card {
+        position: relative;
+        height: 300px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .region-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .region-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        display: flex;
+        align-items: flex-end;
+        padding: 2rem;
+        color: white;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        background: var(--light-bg);
+    }
+
+    .faq-item {
+        border: none;
+        background: transparent;
+    }
+
+    .faq-button {
+        padding: 1rem;
+        font-weight: 500;
+        color: var(--primary-color);
+        background: white;
+        border-radius: 8px;
+        width: 100%;
+        text-align: left;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .faq-button:not(.collapsed) {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        height: 100%;
+    }
+
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--secondary-color);
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Encuentra tu hogar ideal en Chile</h1>
+                <p class="lead mb-4">Explora nuestra selección de propiedades en arriendo y venta en las mejores ubicaciones.</p>
+                <div class="search-form">
+                    <form action="{% url 'search_properties' %}" method="get">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <select class="form-select" name="tipo">
+                                    <option value="">Tipo de Operación</option>
+                                    <option value="venta">Venta</option>
+                                    <option value="arriendo">Arriendo</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select" name="region">
+                                    <option value="">Región</option>
+                                    <option value="metropolitana">Metropolitana</option>
+                                    <option value="valparaiso">Valparaíso</option>
+                                    <option value="biobio">Bío Bío</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select" name="tipo_propiedad">
+                                    <option value="">Tipo de Propiedad</option>
+                                    <option value="casa">Casa</option>
+                                    <option value="departamento">Departamento</option>
+                                    <option value="oficina">Oficina</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100">Buscar Propiedades</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Property Carousel -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Propiedades Destacadas</h6>
+            <h2 class="section-title">Descubre Nuestras Mejores Ofertas</h2>
+        </div>
+
+        <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for property in featured_properties %}
+                    {% if forloop.first %}
+                        <div class="carousel-item active">
+                    {% endif %}
+                    {% if forloop.counter0|divisibleby:3 and not forloop.first %}
+                        </div>
+                        <div class="carousel-item">
+                    {% endif %}
+                    <div class="col-md-4 float-start">
+                        <div class="card property-slide mx-2">
+                        <img src="{{ property.imagen.url|default:'static/images/placeholder-property.jpg' }}" class="card-img-top" alt="{{ property.nombre }}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ property.nombre }}</h5>
+                                <p class="text-muted mb-2">{{ property.direccion.comuna }}, {{ property.direccion.comuna.nombre_region }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h5 mb-0">${{ property.precio_mensual }}</span>
+                                    <a href="{% url 'property_detail' property.id %}" class="btn btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.last %}
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <div class="carousel-item active">
+                        <p class="text-center">No hay propiedades destacadas disponibles en este momento.</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section" id="servicios">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Nuestros Servicios</h6>
+            <h2 class="section-title text-white">¿Por qué elegirnos?</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-people service-icon"></i>
+                    <div class="stats-number">+100</div>
+                    <div class="stats-label">Agentes Inmobiliarios</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-globe service-icon"></i>
+                    <div class="stats-number">+15</div>
+                    <div class="stats-label">Regiones Cubiertas</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-trophy service-icon"></i>
+                    <div class="stats-number">+25</div>
+                    <div class="stats-label">Años de Experiencia</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-check-circle service-icon"></i>
+                    <div class="stats-number">+3500</div>
+                    <div class="stats-label">Contratos Cerrados</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-6">
+                <div class="service-card">
+                    <h3>¿Estás vendiendo?</h3>
+                    <p>Obtén una valoración precisa de tu propiedad y accede a nuestra red de compradores calificados.</p>
+                    <a href="{% url 'crear_propiedad' %}" class="btn btn-primary">Publicar Propiedad</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="service-card">
+                    <h3>¿Buscas propiedad?</h3>
+                    <p>Encuentra la propiedad perfecta con nuestra búsqueda personalizada y asesoramiento experto.</p>
+                    <a href="{% url 'search_properties' %}" class="btn btn-primary">Buscar Propiedades</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Regions Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Principales Regiones</h6>
+            <h2 class="section-title">Explora por Ubicación</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/santiago.jpg' %}" alt="Región Metropolitana">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Región Metropolitana</h3>
+                            <a href="{% url 'search_properties' %}?region=metropolitana" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/valparaiso.jpg' %}" alt="Valparaíso">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Valparaíso</h3>
+                            <a href="{% url 'search_properties' %}?region=valparaiso" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/concepcion.jpg' %}" alt="Concepción">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Concepción</h3>
+                            <a href="{% url 'search_properties' %}?region=biobio" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section py-5" id="contacto">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <h6 class="section-subtitle">Contáctanos</h6>
+                <h2 class="section-title">¿Listo para comenzar?</h2>
+                <p class="mb-4">Completa el formulario y uno de nuestros expertos te contactará a la brevedad.</p>
+
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control" rows="4" placeholder="Mensaje"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h6 class="section-subtitle">FAQ</h6>
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+
+                <div class="accordion mt-4" id="faqAccordion">
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                ¿Cómo puedo publicar mi propiedad?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Regístrate como arrendador/vendedor y sigue los pasos para crear tu anuncio. Podrás agregar fotos, descripción y detalles de tu propiedad.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item mt-3">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                ¿Cuál es el costo del servicio?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                La publicación básica es gratuita. Contamos con planes premium que ofrecen mayor visibilidad y características adicionales.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item mt-3">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                ¿Cómo contacto a un vendedor/arrendador?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                En cada anuncio encontrarás un botón de contacto. Deberás estar registrado para poder enviar mensajes a los propietarios.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

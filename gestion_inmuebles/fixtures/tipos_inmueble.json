@@ -1,0 +1,72 @@
+[
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 1,
+    "fields": {
+      "tipo": "Casa"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 2,
+    "fields": {
+      "tipo": "Departamento"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 3,
+    "fields": {
+      "tipo": "Terreno"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 4,
+    "fields": {
+      "tipo": "Oficina"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 5,
+    "fields": {
+      "tipo": "Local Comercial"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 6,
+    "fields": {
+      "tipo": "Loft"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 7,
+    "fields": {
+      "tipo": "Penthouse"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 8,
+    "fields": {
+      "tipo": "Bodega"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 9,
+    "fields": {
+      "tipo": "Fondo de Comercio"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.tipoinmueble",
+    "pk": 10,
+    "fields": {
+      "tipo": "Quinta"
+    }
+  }
+]

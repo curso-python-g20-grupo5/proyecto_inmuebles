@@ -1,0 +1,114 @@
+[
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 1,
+    "fields": {
+      "nombre_region": "Arica y Parinacota"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 2,
+    "fields": {
+      "nombre_region": "Tarapacá"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 3,
+    "fields": {
+      "nombre_region": "Antofagasta"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 4,
+    "fields": {
+      "nombre_region": "Atacama"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 5,
+    "fields": {
+      "nombre_region": "Coquimbo"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 6,
+    "fields": {
+      "nombre_region": "Valparaíso"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 7,
+    "fields": {
+      "nombre_region": "Metropolitana de Santiago"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 8,
+    "fields": {
+      "nombre_region": "O'Higgins"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 9,
+    "fields": {
+      "nombre_region": "Maule"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 10,
+    "fields": {
+      "nombre_region": "Ñuble"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 11,
+    "fields": {
+      "nombre_region": "Biobío"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 12,
+    "fields": {
+      "nombre_region": "La Araucanía"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 13,
+    "fields": {
+      "nombre_region": "Los Ríos"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 14,
+    "fields": {
+      "nombre_region": "Los Lagos"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 15,
+    "fields": {
+      "nombre_region": "Aysén"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.region",
+    "pk": 16,
+    "fields": {
+      "nombre_region": "Magallanes y de la Antártica Chilena"
+    }
+  }
+]

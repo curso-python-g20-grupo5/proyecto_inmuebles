@@ -1,0 +1,273 @@
+[
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 1,
+    "fields": {
+      "nombre": "Arica",
+      "nombre_region": 1
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 2,
+    "fields": {
+      "nombre": "Camarones",
+      "nombre_region": 1
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 3,
+    "fields": {
+      "nombre": "Iquique",
+      "nombre_region": 2
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 4,
+    "fields": {
+      "nombre": "Alto Hospicio",
+      "nombre_region": 2
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 5,
+    "fields": {
+      "nombre": "Antofagasta",
+      "nombre_region": 3
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 6,
+    "fields": {
+      "nombre": "Calama",
+      "nombre_region": 3
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 7,
+    "fields": {
+      "nombre": "Copiapó",
+      "nombre_region": 4
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 8,
+    "fields": {
+      "nombre": "Caldera",
+      "nombre_region": 4
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 9,
+    "fields": {
+      "nombre": "La Serena",
+      "nombre_region": 5
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 10,
+    "fields": {
+      "nombre": "Coquimbo",
+      "nombre_region": 5
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 11,
+    "fields": {
+      "nombre": "Valparaíso",
+      "nombre_region": 6
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 12,
+    "fields": {
+      "nombre": "Viña del Mar",
+      "nombre_region": 6
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 13,
+    "fields": {
+      "nombre": "Santiago",
+      "nombre_region": 7
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 14,
+    "fields": {
+      "nombre": "Las Condes",
+      "nombre_region": 7
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 15,
+    "fields": {
+      "nombre": "Rancagua",
+      "nombre_region": 8
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 16,
+    "fields": {
+      "nombre": "Machalí",
+      "nombre_region": 8
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 17,
+    "fields": {
+      "nombre": "Talca",
+      "nombre_region": 9
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 18,
+    "fields": {
+      "nombre": "Curicó",
+      "nombre_region": 9
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 19,
+    "fields": {
+      "nombre": "Chillán",
+      "nombre_region": 10
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 20,
+    "fields": {
+      "nombre": "San Carlos",
+      "nombre_region": 10
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 21,
+    "fields": {
+      "nombre": "Concepción",
+      "nombre_region": 11
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 22,
+    "fields": {
+      "nombre": "Talcahuano",
+      "nombre_region": 11
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 23,
+    "fields": {
+      "nombre": "Temuco",
+      "nombre_region": 12
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 24,
+    "fields": {
+      "nombre": "Pucón",
+      "nombre_region": 12
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 25,
+    "fields": {
+      "nombre": "Valdivia",
+      "nombre_region": 13
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 26,
+    "fields": {
+      "nombre": "Panguipulli",
+      "nombre_region": 13
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 27,
+    "fields": {
+      "nombre": "Puerto Montt",
+      "nombre_region": 14
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 28,
+    "fields": {
+      "nombre": "Puerto Varas",
+      "nombre_region": 14
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 29,
+    "fields": {
+      "nombre": "Coyhaique",
+      "nombre_region": 15
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 30,
+    "fields": {
+      "nombre": "Puerto Aysén",
+      "nombre_region": 15
+    }
+  },
+
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 31,
+    "fields": {
+      "nombre": "Punta Arenas",
+      "nombre_region": 16
+    }
+  },
+  {
+    "model": "gestion_inmuebles.comuna",
+    "pk": 32,
+    "fields": {
+      "nombre": "Porvenir",
+      "nombre_region": 16
+    }
+  }
+]

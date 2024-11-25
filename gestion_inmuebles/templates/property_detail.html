@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ property.nombre }} - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+    .property-header {
+        background: var(--primary-color);
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        color: white;
+    }
+
+    .property-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .property-location {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .property-image {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .property-details, .reservation-form {
+        background-color: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+    }
+
+    .property-price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .property-features {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .property-features li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .property-features i {
+        color: var(--secondary-color);
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    .btn-reserve {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-reserve:hover {
+        background-color: #e65c00;
+        border-color: #e65c00;
+        transform: translateY(-2px);
+    }
+
+    .flatpickr-calendar {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+        background: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+
+    .flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)), .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)), .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+        box-shadow: -10px 0 0 var(--secondary-color);
+    }
+
+    .flatpickr-day.week.selected {
+        box-shadow: -5px 0 0 var(--secondary-color), 5px 0 0 var(--secondary-color);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="property-header">
+    <div class="container">
+        <h1 class="property-title">{{ property.nombre }}</h1>
+        <p class="property-location">
+            <i class="bi bi-geo-alt-fill me-2"></i>
+            {{ property.direccion.comuna }}, {{ property.direccion.comuna.nombre_region }}
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="property-image mb-4">
+                <img src="{% static 'images/placeholder-property.jpg' %}" class="img-fluid w-100" alt="{{ property.nombre }}">
+            </div>
+            <div class="property-details">
+                <h2 class="h4 mb-4">Detalles de la Propiedad</h2>
+                <p class="lead">{{ property.descripcion }}</p>
+                <hr>
+                <h3 class="h5 mb-3">Características</h3>
+                <ul class="property-features">
+                    <li><i class="bi bi-house-door"></i> <strong>Tipo de inmueble:</strong> {{ property.tipo_inmueble }}</li>
+                    <li><i class="bi bi-arrows-angle-expand"></i> <strong>M² construidos:</strong> {{ property.caracteristicas.m2_construidos }}</li>
+                    <li><i class="bi bi-arrows-fullscreen"></i> <strong>M² totales:</strong> {{ property.caracteristicas.m2_totales }}</li>
+                    <li><i class="bi bi-car-front"></i> <strong>Estacionamientos:</strong> {{ property.caracteristicas.estacionamientos }}</li>
+                    <li><i class="bi bi-door-open"></i> <strong>Habitaciones:</strong> {{ property.caracteristicas.habitaciones }}</li>
+                    <li><i class="bi bi-droplet"></i> <strong>Baños:</strong> {{ property.caracteristicas.banos }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="reservation-form">
+                <h3 class="h4 mb-4">Información de Arriendo</h3>
+                <p class="property-price">${{ property.precio_mensual }} <span class="fs-6 text-muted">/mes</span></p>
+                <hr>
+                {% if user.is_authenticated and user.profile.user_type == 'arrendador' %}
+                    {% if reserva %}
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            Esta propiedad ya está reservada del {{ reserva.fecha_inicio }} al {{ reserva.fecha_fin }}.
+                        </div>
+                    {% else %}
+                        <h4 class="h5 mb-3">Reservar Propiedad</h4>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="fecha_inicio" class="form-label">Fecha de inicio</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" id="fecha_inicio" name="fecha_inicio" placeholder="Seleccionar fecha" required>
+                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="fecha_fin" class="form-label">Fecha de fin</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" id="fecha_fin" name="fecha_fin" placeholder="Seleccionar fecha" required>
+                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-reserve w-100">Reservar</button>
+                        </form>
+                    {% endif %}
+                {% elif user.is_authenticated and user.profile.user_type == 'arrendatario' %}
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        Eres el propietario de esta propiedad.
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-reserve w-100">Iniciar sesión para reservar</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr.localize(flatpickr.l10ns.es);
+        
+        flatpickr('.datepicker', {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            altInput: true,
+            altFormat: "d F, Y",
+            locale: "es",
+        });
+    });
+</script>
+{% endblock %}
+

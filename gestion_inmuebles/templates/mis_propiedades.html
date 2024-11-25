@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mis Propiedades - G3 Propiedades{% endblock %}
+
+{% block extra_css %}
+<style>
+    .my-properties-header {
+        background-color: var(--primary-color);
+        padding: 4rem 0;
+        margin-bottom: 3rem;
+        color: white;
+    }
+
+    .my-properties-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .property-card {
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .property-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .property-image {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .reservation-status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .status-reserved {
+        background-color: var(--secondary-color);
+        color: white;
+    }
+
+    .status-available {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-edit {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: #15304a;
+        border-color: #15304a;
+        color: white;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        color: rgba(255, 255, 255, 0.5);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="my-properties-header">
+    <div class="container">
+        <h1 class="my-properties-title">Mis Propiedades</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Mis Propiedades</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 my-4">
+        {% for propiedad in propiedades %}
+            <div class="col">
+                <div class="card property-card">
+                    <img src="{% static 'images/placeholder-property.jpg' %}" class="card-img-top property-image" alt="{{ propiedad.nombre }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ propiedad.nombre }}</h5>
+                        <p class="card-text">{{ propiedad.descripcion|truncatewords:20 }}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{ propiedad.precio_mensual }} / mes</p>
+                        {% if propiedad.reservas.exists %}
+                            <h6 class="card-subtitle mb-2 text-muted">Reservas:</h6>
+                            <ul class="list-group list-group-flush">
+                                {% for reserva in propiedad.reservas.all %}
+                                    <li class="list-group-item">
+                                        <strong>Estado:</strong> {{ reserva.estado|capfirst }}<br>
+                                        <strong>Fechas:</strong> {{ reserva.fecha_inicio|date:"d M, Y" }} - {{ reserva.fecha_fin|date:"d M, Y" }}
+                                        {% if reserva.estado == 'pendiente' %}
+                                            <a href="{% url 'aceptar_arrendatario' reserva.id %}" class="btn btn-primary btn-sm mt-2">Aceptar Arrendatario</a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="reservation-status status-available">Disponible</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{% url 'editar_propiedad' propiedad.id %}" class="btn btn-edit w-100 mb-2">Editar</a>
+                        <a href="{% url 'eliminar_propiedad' propiedad.id %}" class="btn btn-delete w-100">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    No tienes propiedades publicadas aún.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center my-4">
+        <a href="{% url 'crear_propiedad' %}" class="btn btn-primary btn-lg">
+            <i class="bi bi-plus-circle me-2"></i>Crear Nueva Propiedad
+        </a>
+    </div>
+</div>
+{% endblock %}
