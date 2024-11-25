@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "desafioinmuebles-fhfzedauafdccygx.brazilsouth-01.azurewebsites.net",
-    "localhost",
+    "127.0.0.1",
 ]
 
 
