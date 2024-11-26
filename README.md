@@ -16,6 +16,10 @@ python manage.py loaddata tipos_inmueble
 
 Archivo de evidencia Hito 2: [https://docs.google.com/document/d/1ZMJwCxJuNW4HzT5UYEdHY5rOSdP8s5wRNl85uTGgCdM/edit?tab=t.0]
 
+## Hito 2 parte 2
+
+Archivo de evidencia Hito 2:[https://docs.google.com/document/d/1ZMJwCxJuNW4HzT5UYEdHY5rOSdP8s5wRNl85uTGgCdM/edit?tab=t.3aku1dava30x]
+
 ## Proyecto Inmuebles
 
 Este proyecto es un sitio web desarrollado con Django, diseñado para gestionar y visualizar viviendas disponibles para arriendo. Es parte de un desafío evaluado que conecta Django a una base de datos PostgreSQL, permitiendo realizar operaciones CRUD y definiendo relaciones entre los datos.
