@@ -1,0 +1,240 @@
+[
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 11,
+    "fields": {
+      "m2_construidos": 120,
+      "m2_totales": 150,
+      "estacionamientos": 2,
+      "habitaciones": 3,
+      "banos": 2
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 12,
+    "fields": {
+      "m2_construidos": 80,
+      "m2_totales": 100,
+      "estacionamientos": 1,
+      "habitaciones": 2,
+      "banos": 1
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 13,
+    "fields": {
+      "m2_construidos": 150,
+      "m2_totales": 200,
+      "estacionamientos": 3,
+      "habitaciones": 4,
+      "banos": 3
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 14,
+    "fields": {
+      "m2_construidos": 60,
+      "m2_totales": 80,
+      "estacionamientos": 1,
+      "habitaciones": 1,
+      "banos": 1
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 15,
+    "fields": {
+      "m2_construidos": 200,
+      "m2_totales": 250,
+      "estacionamientos": 4,
+      "habitaciones": 5,
+      "banos": 4
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 16,
+    "fields": {
+      "m2_construidos": 90,
+      "m2_totales": 110,
+      "estacionamientos": 2,
+      "habitaciones": 2,
+      "banos": 2
+    }
+  },
+  {
+    "model": "gestion_inmuebles.caracteristicas",
+    "pk": 17,
+    "fields": {
+      "m2_construidos": 130,
+      "m2_totales": 160,
+      "estacionamientos": 2,
+      "habitaciones": 3,
+      "banos": 2
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 11,
+    "fields": {
+      "ubicacion": "Calle Falsa 123",
+      "comuna": 1
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 12,
+    "fields": {
+      "ubicacion": "Avenida Siempre Viva 742",
+      "comuna": 2
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 13,
+    "fields": {
+      "ubicacion": "Calle Nueva 456",
+      "comuna": 3
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 14,
+    "fields": {
+      "ubicacion": "Avenida Central 789",
+      "comuna": 4
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 15,
+    "fields": {
+      "ubicacion": "Calle Principal 101",
+      "comuna": 5
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 16,
+    "fields": {
+      "ubicacion": "Avenida Secundaria 202",
+      "comuna": 6
+    }
+  },
+  {
+    "model": "gestion_inmuebles.direccion",
+    "pk": 17,
+    "fields": {
+      "ubicacion": "Calle Tercera 303",
+      "comuna": 7
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 11,
+    "fields": {
+      "propietario": 11,
+      "nombre": "Casa en Arica",
+      "descripcion": "Hermosa casa en Arica con vista al mar.",
+      "direccion": 11,
+      "caracteristicas": 11,
+      "tipo_inmueble": 1,
+      "precio_mensual": 500000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 12,
+    "fields": {
+      "propietario": 12,
+      "nombre": "Departamento en Camarones",
+      "descripcion": "Moderno departamento en Camarones.",
+      "direccion": 12,
+      "caracteristicas": 12,
+      "tipo_inmueble": 2,
+      "precio_mensual": 300000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 13,
+    "fields": {
+      "propietario": 11,
+      "nombre": "Casa en Iquique",
+      "descripcion": "Amplia casa en Iquique con jardín.",
+      "direccion": 13,
+      "caracteristicas": 13,
+      "tipo_inmueble": 1,
+      "precio_mensual": 600000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 14,
+    "fields": {
+      "propietario": 12,
+      "nombre": "Departamento en Antofagasta",
+      "descripcion": "Departamento céntrico en Antofagasta.",
+      "direccion": 14,
+      "caracteristicas": 14,
+      "tipo_inmueble": 2,
+      "precio_mensual": 350000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 15,
+    "fields": {
+      "propietario": 11,
+      "nombre": "Casa en Copiapó",
+      "descripcion": "Casa moderna en Copiapó con piscina.",
+      "direccion": 15,
+      "caracteristicas": 15,
+      "tipo_inmueble": 1,
+      "precio_mensual": 700000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 16,
+    "fields": {
+      "propietario": 12,
+      "nombre": "Departamento en La Serena",
+      "descripcion": "Departamento con vista al mar en La Serena.",
+      "direccion": 16,
+      "caracteristicas": 16,
+      "tipo_inmueble": 2,
+      "precio_mensual": 400000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gestion_inmuebles.inmueble",
+    "pk": 17,
+    "fields": {
+      "propietario": 13,
+      "nombre": "Casa en Valparaíso",
+      "descripcion": "Casa histórica en Valparaíso.",
+      "direccion": 17,
+      "caracteristicas": 17,
+      "tipo_inmueble": 1,
+      "precio_mensual": 800000,
+      "fecha_creacion": "2023-01-01T00:00:00Z",
+      "ultima_modificacion": "2023-01-01T00:00:00Z"
+    }
+  }
+]

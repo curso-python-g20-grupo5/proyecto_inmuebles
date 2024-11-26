@@ -1,0 +1,58 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 11,
+    "fields": {
+      "username": "arrendador1",
+      "password": "pbkdf2_sha256$870000$Z201qu2zX3eReSvtTmLYol$Kz3i1r5ae2Ilr+v8R/JhG3MQQdgjRowa/78uitvNA4s=",
+      "email": "arrendador1@example.com",
+      "first_name": "Arrendador",
+      "last_name": "Uno",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 12,
+    "fields": {
+      "username": "arrendador2",
+      "password": "pbkdf2_sha256$870000$Z201qu2zX3eReSvtTmLYol$Kz3i1r5ae2Ilr+v8R/JhG3MQQdgjRowa/78uitvNA4s=",
+      "email": "arrendador2@example.com",
+      "first_name": "Arrendador",
+      "last_name": "Dos",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 13,
+    "fields": {
+      "username": "arrendatario1",
+      "password": "pbkdf2_sha256$870000$Z201qu2zX3eReSvtTmLYol$Kz3i1r5ae2Ilr+v8R/JhG3MQQdgjRowa/78uitvNA4s=",
+      "email": "arrendatario1@example.com",
+      "first_name": "Arrendatario",
+      "last_name": "Uno",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 14,
+    "fields": {
+      "username": "arrendatario2",
+      "password": "pbkdf2_sha256$870000$Z201qu2zX3eReSvtTmLYol$Kz3i1r5ae2Ilr+v8R/JhG3MQQdgjRowa/78uitvNA4s=",
+      "email": "arrendatario2@example.com",
+      "first_name": "Arrendatario",
+      "last_name": "Dos",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false
+    }
+  }
+]
