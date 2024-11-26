@@ -12,6 +12,17 @@ python manage.py loaddata comunas.json
 python manage.py loaddata tipos_inmueble
 ```
 
+```cmd
+python manage.py loaddata usuarios_perfiles
+```
+
+```cmd
+python manage.py loaddata inmuebles
+```
+> [!TIP]
+> Contraseña para los usuarios cargados: 123Pass4
+
+
 ## Hito 2 parte 1
 
 Archivo de evidencia Hito 2: [https://docs.google.com/document/d/1ZMJwCxJuNW4HzT5UYEdHY5rOSdP8s5wRNl85uTGgCdM/edit?tab=t.0]

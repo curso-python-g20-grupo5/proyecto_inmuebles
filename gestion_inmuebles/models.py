@@ -36,8 +36,8 @@ class Direccion(models.Model):
 
 
 class Caracteristicas(models.Model):
-    m2_construidos = models.FloatField()
-    m2_totales = models.FloatField()
+    m2_construidos = models.IntegerField()
+    m2_totales = models.IntegerField()
     estacionamientos = models.IntegerField()
     habitaciones = models.IntegerField()
     banos = models.IntegerField()
@@ -52,7 +52,7 @@ class Inmueble(models.Model):
     direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     caracteristicas = models.OneToOneField(Caracteristicas, on_delete=models.CASCADE)
     tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.CASCADE)
-    precio_mensual = models.DecimalField(max_digits=10, decimal_places=2)
+    precio_mensual = models.IntegerField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
 
@@ -76,7 +76,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        Profile.objects.get_or_create(user=instance)
     else:
         # Get or create the profile if it doesn't exist
         Profile.objects.get_or_create(user=instance)

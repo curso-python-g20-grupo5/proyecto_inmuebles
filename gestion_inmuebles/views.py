@@ -147,7 +147,7 @@ def cancelar_reserva(request, reserva_id):
     return render(request, "cancelar_reserva.html", {"reserva": reserva})
 
 
-@login_required
+# @login_required
 def property_detail(request, pk):
     property = get_object_or_404(Inmueble, pk=pk)
     reserva = Reserva.objects.filter(inmueble=property, estado="confirmada").first()
