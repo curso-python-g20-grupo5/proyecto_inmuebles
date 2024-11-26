@@ -94,11 +94,11 @@
 {% block content %}
 <section class="property-header text-center">
     <div class="container">
-        <h1 class="display-4 fw-bold mb-4">Property Listing Types</h1>
+        <h1 class="display-4 fw-bold mb-4">Tipos de Propiedades</h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Home</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">Property Listing Types</li>
+                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Tipos de Propiedades</li>
             </ol>
         </nav>
     </div>
@@ -131,9 +131,9 @@
         <!-- Sidebar Filters -->
         <div class="col-lg-3">
             <div class="filter-section">
-                <h3 class="filter-title">Filters</h3>
+                <h3 class="filter-title">Filtros</h3>
                 <div class="mb-3">
-                    <label class="form-label">Price Range</label>
+                    <label class="form-label">Precios</label>
                     <div class="d-flex gap-2">
                         <input type="number
 " class="form-control" placeholder="Min">
@@ -141,14 +141,14 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Property Type</label>
+                    <label class="form-label">Tipo de propiedad</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="house">
-                        <label class="form-check-label" for="house">House</label>
+                        <label class="form-check-label" for="house">Casa</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="apartment">
-                        <label class="form-check-label" for="apartment">Apartment</label>
+                        <label class="form-check-label" for="apartment">Departamento</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="land">
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Bedrooms</label>
+                    <label class="form-label">Dormitorios</label>
                     <select class="form-select">
                         <option value="">Any</option>
                         <option value="1">1+</option>
@@ -166,7 +166,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Bathrooms</label>
+                    <label class="form-label">Baños</label>
                     <select class="form-select">
                         <option value="">Any</option>
                         <option value="1">1+</option>
@@ -211,7 +211,7 @@
                 {% empty %}
                 <div class="col-12">
                     <div class="alert alert-info text-center" role="alert">
-                        No properties found matching your search criteria.
+                        No se encontraron propiedades que coincidan con sus criterios de búsqueda.
                     </div>
                 </div>
                 {% endfor %}
