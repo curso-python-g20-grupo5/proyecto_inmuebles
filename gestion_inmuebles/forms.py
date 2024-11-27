@@ -86,7 +86,6 @@ class PropertySearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["comuna"].queryset = Comuna.objects.none()
 
         if "region" in self.data:
             try:
@@ -95,7 +94,9 @@ class PropertySearchForm(forms.Form):
                     nombre_region_id=region_id
                 )
             except (ValueError, TypeError):
-                pass
+                self.fields["comuna"].queryset = Comuna.objects.all()
+        else:
+            self.fields["comuna"].queryset = Comuna.objects.all()
 
 
 class InmuebleForm(forms.ModelForm):
