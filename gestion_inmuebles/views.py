@@ -15,6 +15,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 
+def index(request):
+    return render(request, 'index.html')
+
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)

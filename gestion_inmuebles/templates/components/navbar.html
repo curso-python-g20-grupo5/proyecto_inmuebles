@@ -1,4 +1,55 @@
 {% load static %}
+
+<style>
+    /* Top Bar */
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+    /* Main Navbar */
+    #main_navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Navbar Links */
+    #main_navbar .navbar-nav .nav-link {
+        color: white !important; /* White text */
+        transition: color 0.3s; /* Smooth color transition */
+    }
+
+    #main_navbar .navbar-nav .nav-link:hover {
+        color: #f8c146 !important; /* Gold on hover */
+    }
+
+    #main_navbar .navbar-brand {
+        color: white !important; /* White brand text */
+    }
+
+    #main_navbar .navbar-brand:hover {
+        color: #f8c146 !important; /* Gold on hover */
+    }
+
+    /* Button Style */
+    #main_navbar .btn-primary {
+        background-color: #f8c146;
+        border: none;
+        color: white;
+    }
+
+    #main_navbar .btn-primary:hover {
+        background-color: #d1a63d;
+    }
+</style>
+
 <!-- Top Bar -->
 <div class="top-bar">
     <div class="container">
@@ -8,17 +59,17 @@
                 <span class="ms-3"><i class="bi bi-telephone"></i> +56 2 2123 4567</span>
             </div>
             <div class="col-md-6 text-end">
-                <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="me-3"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="me-3 text-light"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="me-3 text-light"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="me-3 text-light"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Main Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top">
+<nav id="main_navbar" class="navbar navbar-expand-lg sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{% url 'landing' %}">G3 Propiedades</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -32,9 +83,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'search_properties' %}">Propiedades</a>
                 </li>
-                {% comment %} <li class="nav-item">
-                    <a class="nav-link" href="#contacto">Contacto</a>
-                </li> {% endcomment %}
                 {% if user.is_authenticated %}
                     {% if user.profile.user_type == 'arrendatario' %}
                         <li class="nav-item">

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Nuestro Equipo - Tu plataforma inmobiliaria de confianza
+{% endblock %}
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        color: white;
+        background: url("{% static 'images/casa-1.png' %}") no-repeat center center/cover;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1rem;
+    }
+    nav a:hover {
+        text-decoration: underline;
+    }
+    .hero {
+        text-align: left;
+        padding: 150px 20px;
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1rem;
+    }
+    .hero h1 {
+        font-size: 3rem;
+        margin: 0;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+    .social-icons {
+        margin-top: 30px;
+    }
+    .social-icons a {
+        color: white;
+        font-size: 1.5rem;
+        margin: 0 10px;
+        text-decoration: none;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<main>
+    <div class="hero">
+        <h1 class="my-4">In MAJESTIC GREENLAND</h1>
+        <p>An amazing experience of a lifetime made possible</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
+{% endblock %}

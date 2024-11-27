@@ -56,4 +56,5 @@ urlpatterns = [
     ),
     path("mis-propiedades/", views.mis_propiedades, name="mis_propiedades"),
     path("acerca/", views.acerca, name="acerca"),
+    path('index/', views.index, name='index')
 ]
