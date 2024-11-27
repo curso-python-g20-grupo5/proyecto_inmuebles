@@ -34,6 +34,10 @@ def home(request):
     return render(request, "home.html")
 
 
+def acerca(request):
+    return render(request, "about.html", {})
+
+
 @login_required
 def profile_view(request):
     if request.method == "POST":
