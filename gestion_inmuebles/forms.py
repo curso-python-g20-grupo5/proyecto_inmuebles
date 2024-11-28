@@ -69,34 +69,43 @@ class UserProfileForm(forms.ModelForm):
         return user
 
 
+# class PropertySearchForm(forms.Form):
+#     region = forms.ModelChoiceField(
+#         queryset=Region.objects.all(), required=False, empty_label="Todas las regiones"
+#     )
+#     comuna = forms.ModelChoiceField(
+#         queryset=Comuna.objects.all(), required=False, empty_label="Todas las comunas"
+#     )
+#     tipo_inmueble = forms.ModelChoiceField(
+#         queryset=TipoInmueble.objects.all(),
+#         required=False,
+#         empty_label="Todos los tipos",
+#     )
+#     precio_min = forms.DecimalField(required=False, min_value=0)
+#     precio_max = forms.DecimalField(required=False, min_value=0)
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields["comuna"].queryset = Comuna.objects.none()
+
+#         if "region" in self.data:
+#             try:
+#                 region_id = int(self.data.get("region"))
+#                 self.fields["comuna"].queryset = Comuna.objects.filter(
+#                     nombre_region_id=region_id
+#                 )
+#             except (ValueError, TypeError):
+#                 pass
+
 class PropertySearchForm(forms.Form):
-    region = forms.ModelChoiceField(
-        queryset=Region.objects.all(), required=False, empty_label="Todas las regiones"
+    tipo_operacion = forms.ChoiceField(
+        choices=[('venta', 'Venta'), ('arriendo', 'Arriendo')], required=False
     )
-    comuna = forms.ModelChoiceField(
-        queryset=Comuna.objects.all(), required=False, empty_label="Todas las comunas"
-    )
-    tipo_inmueble = forms.ModelChoiceField(
-        queryset=TipoInmueble.objects.all(),
-        required=False,
-        empty_label="Todos los tipos",
-    )
-    precio_min = forms.DecimalField(required=False, min_value=0)
-    precio_max = forms.DecimalField(required=False, min_value=0)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["comuna"].queryset = Comuna.objects.none()
-
-        if "region" in self.data:
-            try:
-                region_id = int(self.data.get("region"))
-                self.fields["comuna"].queryset = Comuna.objects.filter(
-                    nombre_region_id=region_id
-                )
-            except (ValueError, TypeError):
-                pass
-
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), required=False)
+    tipo_propiedad = forms.ModelChoiceField(queryset=TipoInmueble.objects.all(), required=False)
+    comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), required=False)
+    precio_min = forms.IntegerField(required=False)
+    precio_max = forms.IntegerField(required=False)
 
 class InmuebleForm(forms.ModelForm):
     nombre = forms.CharField(max_length=200, label="Nombre de la propiedad")

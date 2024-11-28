@@ -1,250 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Property Listing Types - Veedoo{% endblock %}
-
-{% block extra_css %}
-<style>
-    .property-header {
-        background: linear-gradient(rgba(28, 61, 91, 0.8), rgba(28, 61, 91, 0.8)), url('{% static "images/property-header.jpg" %}');
-        background-size: cover;
-        background-position: center;
-        padding: 6rem 0;
-        color: white;
-    }
-
-    .search-container {
-        background: white;
-        border-radius: 8px;
-        padding: 2rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        margin-top: -4rem;
-        position: relative;
-        z-index: 2;
-    }
-
-    .property-card {
-        border: none;
-        border-radius: 8px;
-        overflow: hidden;
-        height: 100%;
-    }
-
-    .property-image {
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .property-features {
-        display: flex;
-        gap: 1rem;
-        margin: 0.5rem 0;
-        color: #666;
-        font-size: 0.9rem;
-    }
-
-    .property-feature {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-    }
-
-    .property-price {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--secondary-color);
-    }
-
-    .property-location {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .btn-outline-primary {
-        color: var(--secondary-color);
-        border-color: var(--secondary-color);
-    }
-
-    .btn-outline-primary:hover {
-        background-color: var(--secondary-color);
-        color: white;
-    }
-
-    .filter-section {
-        background-color: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .filter-title {
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        color: var(--primary-color);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<section class="property-header text-center">
-    <div class="container">
-        <h1 class="display-4 fw-bold mb-4">Tipos de Propiedades</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item"><a href="{% url 'landing' %}" class="text-white">Inicio</a></li>
-                <li class="breadcrumb-item active text-white" aria-current="page">Tipos de Propiedades</li>
-            </ol>
-        </nav>
-    </div>
-</section>
-
-<div class="container py-4">
-    <div class="search-container mb-5">
-        <form method="get" id="search-form" class="row g-3">
-            {% for field in form %}
-            <div class="col-md-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {% if field.field.widget.input_type == 'select' %}
-                    <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select">
-                        {% for value, label in field.field.choices %}
-                            <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>{{ label }}</option>
-                        {% endfor %}
-                    </select>
-                {% else %}
-                    <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control" value="{{ field.value|default:'' }}">
-                {% endif %}
-            </div>
-            {% endfor %}
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100">Search Properties</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="row">
-        <!-- Sidebar Filters -->
-        <div class="col-lg-3">
-            <div class="filter-section">
-                <h3 class="filter-title">Filtros</h3>
-                <div class="mb-3">
-                    <label class="form-label">Precios</label>
-                    <div class="d-flex gap-2">
-                        <input type="number
-" class="form-control" placeholder="Min">
-                        <input type="number" class="form-control" placeholder="Max">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Tipo de propiedad</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="house">
-                        <label class="form-check-label" for="house">Casa</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="apartment">
-                        <label class="form-check-label" for="apartment">Departamento</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="land">
-                        <label class="form-check-label" for="land">Land</label>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Dormitorios</label>
-                    <select class="form-select">
-                        <option value="">Any</option>
-                        <option value="1">1+</option>
-                        <option value="2">2+</option>
-                        <option value="3">3+</option>
-                        <option value="4">4+</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Baños</label>
-                    <select class="form-select">
-                        <option value="">Any</option>
-                        <option value="1">1+</option>
-                        <option value="2">2+</option>
-                        <option value="3">3+</option>
-                    </select>
-                </div>
-            </div>
+    <section class="property-header text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Tipos de Propiedades</h1>
         </div>
+    </section>
 
-        <!-- Property Listings -->
-        <div class="col-lg-9">
-            <div class="row g-4">
-                {% for property in properties %}
-                <div class="col-md-6 animate-fade-in" style="animation-delay: {{ forloop.counter|add:"-1" }}00ms;">
+    <div class="container py-4">
+        <!-- Mostrar datos para depuración -->
+        <!--<pre>{{ properties }}</pre>-->
+
+        <div class="row g-4">
+            {% for propiedad in properties %}
+                <div class="col-md-6">
                     <div class="card property-card">
-                        <img src="{% static 'images/placeholder-property.jpg' %}" class="property-image" alt="{{ property.nombre }}">
+                        {% if propiedad.imagen %}
+                            <img src="{{ propiedad.imagen.url }}" class="property-image" alt="{{ propiedad.nombre }}">
+                        {% else %}
+                            <img src="{% static 'images/default-property.jpg' %}" class="property-image" alt="Imagen no disponible">
+                        {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title mb-2">{{ property.nombre }}</h5>
-                            <div class="property-location">
-                                <i class="bi bi-geo-alt"></i>
-                                <span>{{ property.direccion.comuna }}, {{ property.direccion.comuna.nombre_region }}</span>
-                            </div>
-                            <div class="property-features">
-                                <div class="property-feature">
-                                    <i class="bi bi-people"></i>
-                                    <span>{{ property.caracteristicas.habitaciones }} guests</span>
-                                </div>
-                                <div class="property-feature">
-                                    <i class="bi bi-door-closed"></i>
-                                    <span>{{ property.caracteristicas.habitaciones }} rooms</span>
-                                </div>
-                            </div>
-                            <p class="card-text text-muted mb-3">{{ property.descripcion|truncatewords:15 }}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="property-price mb-0">${{ property.precio_mensual }} <span class="text-muted fs-6">/month</span></p>
-                                <a href="{% url 'property_detail' property.id %}" class="btn btn-outline-primary">Ver Detalles</a>
-                            </div>
+                            <h5 class="card-title">{{ propiedad.nombre }}</h5>
+                            <p class="card-text">{{ propiedad.descripcion }}</p>
+                            <p class="property-price">${{ propiedad.precio_mensual }}</p>
+                            <a href="#" class="btn btn-outline-primary">Ver Detalles</a>
                         </div>
                     </div>
                 </div>
-                {% empty %}
+            {% empty %}
                 <div class="col-12">
-                    <div class="alert alert-info text-center" role="alert">
-                        No se encontraron propiedades que coincidan con sus criterios de búsqueda.
-                    </div>
+                    <p class="text-center">No se encontraron propiedades que coincidan con los criterios de búsqueda.</p>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
     </div>
-</div>
 {% endblock %}
-
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const regionSelect = document.getElementById('id_region');
-    const comunaSelect = document.getElementById('id_comuna');
-
-    regionSelect.addEventListener('change', function() {
-        const regionId = this.value;
-        comunaSelect.innerHTML = '<option value="">All communes</option>';
-
-        if (regionId) {
-            fetch(`/api/comunas/?region=${regionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(comuna => {
-                        const option = document.createElement('option');
-                        option.value = comuna.id;
-                        option.textContent = comuna.nombre;
-                        comunaSelect.appendChild(option);
-                    });
-                });
-        }
-    });
-});
-</script>
-{% endblock %}
-
