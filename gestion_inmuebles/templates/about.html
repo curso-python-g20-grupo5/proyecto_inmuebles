@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Nuestro Equipo - Tu plataforma inmobiliaria de confianza
+{% endblock %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<!-- Sección: Acerca de G3 Inmobiliaria -->
+<div class="container p-5">
+  <p class="my-4 fs-3">Acerca de G3 Inmobiliaria</p>
+  <p class="my-4 fs-5" id="lorem" style="text-align: justify;">
+    En G3 Inmobiliaria, somos una empresa especializada en ofrecer las mejores
+    soluciones para quienes buscan propiedades en arriendo. Nuestro objetivo es
+    brindarte una experiencia confiable, eficiente y personalizada para que
+    encuentres el espacio ideal que se adapte a tus necesidades y estilo de
+    vida. Con años de experiencia en el mercado inmobiliario, conocemos la
+    importancia de encontrar un lugar que no solo sea un espacio físico, sino un
+    hogar o el entorno perfecto para desarrollar tus proyectos. Trabajamos con
+    un enfoque centrado en la calidad y el servicio al cliente, ofreciendo
+    propiedades cuidadosamente seleccionadas que cumplen con altos estándares de
+    confort y funcionalidad. Nuestra misión es simplificar el proceso de
+    búsqueda, arriendo y gestión de propiedades, asegurando transparencia en
+    cada paso y construyendo relaciones basadas en confianza y profesionalismo.
+    Ya sea que estés buscando un departamento acogedor, una casa espaciosa o un
+    local comercial estratégico, en G3 Inmobiliaria estamos aquí para ayudarte a
+    encontrar lo que necesitas.
+  </p>
+</div>
+
+<!-- Sección: Nuestro Equipo -->
+
+<section id="nuestro-equipo" class="container py-5">
+  <h2 class="text-center mb-4">Nuestro Equipo</h2>
+  <div class="row text-center">
+
+    <!-- SECCIÓN ESTEBAN -->
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <img src="{% static 'images/profile-Esteban.jpg' %}" alt="Perfil de Esteban Hernández Cáceres"
+            class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+          <a class="card-title link-underline link-underline-opacity-0" data-bs-toggle="collapse" href="#collapse1"
+            aria-expanded="true" aria-controls="collapse">
+            <h5 class="card-title">Esteban Hernández Cáceres</h5>
+            <p class="card-text text-muted">Sociólogo, Universidad de Chile</p>
+          </a>
+          <div class="collapse" id="collapse1">
+            <p class="card-text" style="text-align: justify;">Soy Sociólogo de la Universidad de Chile y Bachiller en
+              Ciencias Sociales y Humanidades. Además, me desempeño como Desarrollador Full Stack Python. Me interesan
+              las investigaciones que permitan resolver las diversas problemáticas sociales, principalmente en las
+              temáticas de meritocracia, desigualdad social, malestar social y salud mental.
+              Mi objetivo es generar conocimientos y soluciones innovadoras que impacten positivamente en la sociedad,
+              combinando la rigurosidad académica con la versatilidad de la tecnología.</p>
+          </div>
+          <a class="linkedin" href="https://www.linkedin.com/in/esteban-hern%C3%A1ndez-c%C3%A1ceres-979a46208/"
+            target="_blank" data-bs-toggle="mensaje" title="Linkedin"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SECCIÓN ROSA -->
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <img src="{% static 'images/profile-Rosa.jpg' %}" alt="Perfil de Rosa Rubio"
+            class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+          <a class="card-title link-underline link-underline-opacity-0" data-bs-toggle="collapse" href="#collapse2"
+            aria-expanded="true" aria-controls="collapse">
+            <h5 class="card-title">Rosa Rubio</h5>
+            <p class="card-text text-muted">Ingeniera en
+              Informática, Instituto Profesional IPP</p>
+          </a>
+          <div class="collapse" id="collapse2">
+            <p class="card-text" style="text-align: justify;"> Soy una profesional multidisciplinaria con formación en
+              Administración de Empresas, Ingeniería en Informática y Desarrolladora Full Stack Python, lo que me
+              permite combinar habilidades técnicas y estratégicas para resolver problemas complejos. Con un enfoque
+              orientado a resultados, mi objetivo es diseñar e implementar soluciones eficientes que impulsen la
+              productividad y el crecimiento empresarial.</p>
+          </div>
+          <a class="linkedin" href="https://www.linkedin.com/in/rosa-rubio-pacheco-frontend/" target="_blank"
+            data-bs-toggle="mensaje" title="Linkedin"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- SECCIÓN VALERY -->
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <img src="{% static 'images/profile-Valery.jpg' %}" alt="Perfil de Valery Maragaño"
+            class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+          <a class="card-title link-underline link-underline-opacity-0" data-bs-toggle="collapse" href="#collapse3"
+            aria-expanded="true" aria-controls="collapse">
+            <h5 class="card-title">Valery Maragaño</h5>
+            <p class="card-text text-muted">Ingeniera en Alimentos,
+              Universidad de Los Lagos</p>
+          </a>
+          <div class="collapse" id="collapse3">
+            <p class="card-text" style="text-align: justify;"> Soy Ingeniera en Alimentos y Licenciada en Ciencias delos
+              Alimentos, de la Universidad de Los Lagos y Desarrolladora Full Stack Python. Tengo una sólida base
+              científica y analítica en el área de alimentos, como también un enfoque hacia la creación de soluciones
+              tecnológicas con Python y desarrollo web. Tengo un compromiso constante con el aprendizaje continuo y la
+              aplicación de nuevas herramientas en entornos profesionales para contribuir a proyectos innovadores y
+              multidisciplinarios.</p>
+          </div>
+          <a class="linkedin" href="https://www.linkedin.com/in/valery-maraga%C3%B1o-4b22b0b3/" target="_blank"
+            data-bs-toggle="mensaje" title="Linkedin"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN MARCO -->
+    <div class="col-md-6 col-lg-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <img src="{% static 'images/profile-Marco.png' %}" alt="Perfil de Marco Alvarado"
+            class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+          <a class="card-title link-underline link-underline-opacity-0" data-bs-toggle="collapse" href="#collapse4"
+            aria-expanded="true" aria-controls="collapse">
+            <h5 class="card-title">Marco Alvarado</h5>
+            <p class="card-text text-muted"> Ingeniero de Software, Pontificia Universidad Católica de Valparaíso </p>
+          </a>
+          <div class="collapse" id="collapse4">
+            <p class="card-text" style="text-align: justify;"> Soy un versátil Ingeniero de Software con más de 8 años
+              de experiencia, especializado en desarrollo Fullstack con tecnologías como React, TypeScript y PHP. A lo
+              largo de mi carrera, he trabajado con herramientas como COBOL, WordPress, SQL y Mixpanel, adaptándome a
+              diversos entornos profesionales. Con experiencia en trabajo remoto y colaboración en equipos
+              multidisciplinarios y globales, me enfoco en crear soluciones de software innovadoras y de alto impacto,
+              agregando valor en cada proyecto que desarrollo.</p>
+          </div>
+          <a class="linkedin" href="https://www.linkedin.com/in/marcoalvaradot/" target="_blank"
+            data-bs-toggle="mensaje" title="Linkedin"><i class="fa-brands fa-linkedin fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
