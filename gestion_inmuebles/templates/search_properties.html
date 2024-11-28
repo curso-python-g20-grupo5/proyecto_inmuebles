@@ -122,7 +122,7 @@
             </div>
             {% endfor %}
             <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100">Search Properties</button>
+                <button type="submit" class="btn btn-primary w-100">Buscar propiedades</button>
             </div>
         </form>
     </div>
@@ -152,13 +152,13 @@
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="land">
-                        <label class="form-check-label" for="land">Land</label>
+                        <label class="form-check-label" for="land">Terreno</label>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Dormitorios</label>
                     <select class="form-select">
-                        <option value="">Any</option>
+                        <option value="">Cualquiera</option>
                         <option value="1">1+</option>
                         <option value="2">2+</option>
                         <option value="3">3+</option>
@@ -168,7 +168,7 @@
                 <div class="mb-3">
                     <label class="form-label">Baños</label>
                     <select class="form-select">
-                        <option value="">Any</option>
+                        <option value="">Cualquiera</option>
                         <option value="1">1+</option>
                         <option value="2">2+</option>
                         <option value="3">3+</option>
@@ -193,16 +193,16 @@
                             <div class="property-features">
                                 <div class="property-feature">
                                     <i class="bi bi-people"></i>
-                                    <span>{{ property.caracteristicas.habitaciones }} guests</span>
+                                    <span>{{ property.caracteristicas.habitaciones }} personas</span>
                                 </div>
                                 <div class="property-feature">
                                     <i class="bi bi-door-closed"></i>
-                                    <span>{{ property.caracteristicas.habitaciones }} rooms</span>
+                                    <span>{{ property.caracteristicas.habitaciones }} habitaciones</span>
                                 </div>
                             </div>
                             <p class="card-text text-muted mb-3">{{ property.descripcion|truncatewords:15 }}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="property-price mb-0">${{ property.precio_mensual }} <span class="text-muted fs-6">/month</span></p>
+                                <p class="property-price mb-0">${{ property.precio_mensual }} <span class="text-muted fs-6">/mes</span></p>
                                 <a href="{% url 'property_detail' property.id %}" class="btn btn-outline-primary">Ver Detalles</a>
                             </div>
                         </div>
