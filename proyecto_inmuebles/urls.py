@@ -40,6 +40,7 @@ urlpatterns = [
         name="aceptar_arrendatario",
     ),
     path("mis-propiedades/", views.mis_propiedades, name="mis_propiedades"),
+    path("acerca/", views.acerca, name="acerca"),
 ]
 
 # Añadir rutas para servir archivos de medios durante el desarrollo

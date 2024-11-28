@@ -13,9 +13,9 @@ from django.db import transaction
 from .models import Inmueble, Reserva
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
+
 from .forms import PropertySearchForm
 from .models import Region, TipoInmueble
-
 
 def register(request):
     if request.method == "POST":
@@ -34,6 +34,10 @@ def register(request):
 
 def home(request):
     return render(request, "home.html")
+
+
+def acerca(request):
+    return render(request, "about.html", {})
 
 
 @login_required
@@ -254,6 +258,7 @@ def mis_propiedades(request):
 #     }
 #     return render(request, "landing.html", context)
 
+
 def landing_view(request):
     featured_properties = Inmueble.objects.all().order_by("-fecha_creacion")[:6]
     regiones = Region.objects.all()
@@ -279,3 +284,7 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, "registration/login.html", {"form": form})
+
+
+
+
