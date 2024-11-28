@@ -81,7 +81,7 @@
                             </label>
                             {% if field.name == 'descripcion' %}
                                 <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" rows="4">{{ field.value|default:'' }}</textarea>
-                            {% elif field.name == 'tipo_inmueble' or field.name == 'comuna' %}
+                            {% elif field.name == 'tipo_inmueble' or field.name == 'comuna'%}
                                 <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select {% if field.errors %}is-invalid{% endif %}">
                                     <option value="">Seleccione una opción</option>
                                     {% for value, label in field.field.choices %}
@@ -100,6 +100,18 @@
                         </div>
                     </div>
                 {% endfor %}
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="region" class="form-label">Región <span class="text-danger">*</span></label>
+                        <select id="region" name="region" class="form-select">
+                            <option value="" disabled selected>Seleccione una región</option>
+                            {% for region in regiones %}
+                                <option value="{{ region.id }}">{{ nombre_region }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="mt-4 text-center">
                 <button type="submit" class="btn btn-primary btn-lg">
