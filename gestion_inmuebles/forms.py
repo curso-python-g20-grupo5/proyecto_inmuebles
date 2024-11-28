@@ -121,7 +121,37 @@ class InmuebleForm(forms.ModelForm):
 
     class Meta:
         model = Inmueble
-        fields = ["nombre", "descripcion", "tipo_inmueble", "precio_mensual"]
+        fields = [
+            "nombre",
+            "descripcion",
+            "tipo_inmueble",
+            "precio_mensual",
+            "ubicacion",
+            "comuna",
+            "m2_construidos",
+            "m2_totales",
+            "estacionamientos",
+            "habitaciones",
+            "banos",
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            # Cargar los valores de dirección y características
+            self.fields["ubicacion"].initial = self.instance.direccion.ubicacion
+            self.fields["comuna"].initial = self.instance.direccion.comuna
+            self.fields["m2_construidos"].initial = (
+                self.instance.caracteristicas.m2_construidos
+            )
+            self.fields["m2_totales"].initial = self.instance.caracteristicas.m2_totales
+            self.fields["estacionamientos"].initial = (
+                self.instance.caracteristicas.estacionamientos
+            )
+            self.fields["habitaciones"].initial = (
+                self.instance.caracteristicas.habitaciones
+            )
+            self.fields["banos"].initial = self.instance.caracteristicas.banos
 
     def save(self, commit=True, user=None):
         inmueble = super().save(commit=False)
@@ -129,17 +159,36 @@ class InmuebleForm(forms.ModelForm):
             inmueble.propietario = user
 
         if commit:
-            direccion = Direccion.objects.create(
-                ubicacion=self.cleaned_data["ubicacion"],
-                comuna=self.cleaned_data["comuna"],
+            # Actualizar la dirección existente si ya existe
+            direccion, created = Direccion.objects.get_or_create(
+                inmueble=inmueble,
+                defaults={
+                    "ubicacion": self.cleaned_data["ubicacion"],
+                    "comuna": self.cleaned_data["comuna"],
+                },
             )
-            caracteristicas = Caracteristicas.objects.create(
-                m2_construidos=self.cleaned_data["m2_construidos"],
-                m2_totales=self.cleaned_data["m2_totales"],
-                estacionamientos=self.cleaned_data["estacionamientos"],
-                habitaciones=self.cleaned_data["habitaciones"],
-                banos=self.cleaned_data["banos"],
+            direccion.ubicacion = self.cleaned_data["ubicacion"]
+            direccion.comuna = self.cleaned_data["comuna"]
+            direccion.save()
+
+            # Actualizar las características existentes
+            caracteristicas, created = Caracteristicas.objects.get_or_create(
+                inmueble=inmueble,
+                defaults={
+                    "m2_construidos": self.cleaned_data["m2_construidos"],
+                    "m2_totales": self.cleaned_data["m2_totales"],
+                    "estacionamientos": self.cleaned_data["estacionamientos"],
+                    "habitaciones": self.cleaned_data["habitaciones"],
+                    "banos": self.cleaned_data["banos"],
+                },
             )
+            caracteristicas.m2_construidos = self.cleaned_data["m2_construidos"]
+            caracteristicas.m2_totales = self.cleaned_data["m2_totales"]
+            caracteristicas.estacionamientos = self.cleaned_data["estacionamientos"]
+            caracteristicas.habitaciones = self.cleaned_data["habitaciones"]
+            caracteristicas.banos = self.cleaned_data["banos"]
+            caracteristicas.save()
+
             inmueble.direccion = direccion
             inmueble.caracteristicas = caracteristicas
             inmueble.save()
