@@ -111,6 +111,7 @@ class InmuebleForm(forms.ModelForm):
     # Campos para Direccion
     ubicacion = forms.CharField(max_length=200, label="Dirección")
     comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), label="Comuna")
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Region")
 
     # Campos para Caracteristicas
     m2_construidos = forms.FloatField(label="M² construidos")
@@ -132,6 +133,7 @@ class InmuebleForm(forms.ModelForm):
             direccion = Direccion.objects.create(
                 ubicacion=self.cleaned_data["ubicacion"],
                 comuna=self.cleaned_data["comuna"],
+                region=self.cleaned_data["region"],
             )
             caracteristicas = Caracteristicas.objects.create(
                 m2_construidos=self.cleaned_data["m2_construidos"],
