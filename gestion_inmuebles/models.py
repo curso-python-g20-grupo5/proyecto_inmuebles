@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 class Region(models.Model):
     nombre_region = models.CharField(max_length=100)
 
@@ -44,6 +43,11 @@ class Caracteristicas(models.Model):
 
 
 class Inmueble(models.Model):
+    TIPO_OPERACION_CHOICES = [
+        ('venta', 'Venta'),
+        ('arriendo', 'Arriendo'),
+    ]
+    
     propietario = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="propiedades"
     )
@@ -55,9 +59,14 @@ class Inmueble(models.Model):
     precio_mensual = models.IntegerField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     ultima_modificacion = models.DateTimeField(auto_now=True)
+    imagen = models.ImageField(upload_to="inmuebles/", null=True, blank=True)
+    tipo_operacion = models.CharField(
+        max_length=10, choices=TIPO_OPERACION_CHOICES, default='arriendo'
+    )  # Nuevo campo para Tipo de Operación
 
     def __str__(self):
-        return self.nombre
+        return f"{self.tipo_operacion.capitalize()} {self.tipo_inmueble.tipo} en {self.direccion.comuna}"
+
 
 
 class Profile(models.Model):

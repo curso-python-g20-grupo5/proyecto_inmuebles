@@ -13,6 +13,8 @@ from django.db import transaction
 from .models import Inmueble, Reserva
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
+
+from .forms import PropertySearchForm
 from .models import Region, TipoInmueble
 
 def register(request):
@@ -61,33 +63,73 @@ def logout_view(request):
     return redirect("login")
 
 
+# def search_properties(request):
+#     form = PropertySearchForm(request.GET or None)
+#     properties = Inmueble.objects.all()
+
+#     if form.is_valid():
+#         region = form.cleaned_data.get("region")
+#         comuna = form.cleaned_data.get("comuna")
+#         tipo_inmueble = form.cleaned_data.get("tipo_inmueble")
+#         precio_min = form.cleaned_data.get("precio_min")
+#         precio_max = form.cleaned_data.get("precio_max")
+
+#         if region:
+#             properties = properties.filter(direccion__comuna__nombre_region=region)
+#         if comuna:
+#             properties = properties.filter(direccion__comuna=comuna)
+#         if tipo_inmueble:
+#             properties = properties.filter(tipo_inmueble=tipo_inmueble)
+#         if precio_min:
+#             properties = properties.filter(precio_mensual__gte=precio_min)
+#         if precio_max:
+#             properties = properties.filter(precio_mensual__lte=precio_max)
+
+#     context = {
+#         "form": form,
+#         "properties": properties,
+#     }
+#     return render(request, "search_properties.html", context)
+
+
+
+
+
 def search_properties(request):
-    form = PropertySearchForm(request.GET or None)
-    properties = Inmueble.objects.all()
+    form = PropertySearchForm(request.GET)
+    properties = Inmueble.objects.all()  # Inicializamos con todas las propiedades
 
     if form.is_valid():
+        # Filtrar por tipo de operación (venta o arriendo)
+        tipo_operacion = form.cleaned_data.get("tipo_operacion")
         region = form.cleaned_data.get("region")
+        tipo_propiedad = form.cleaned_data.get("tipo_propiedad")
         comuna = form.cleaned_data.get("comuna")
-        tipo_inmueble = form.cleaned_data.get("tipo_inmueble")
         precio_min = form.cleaned_data.get("precio_min")
         precio_max = form.cleaned_data.get("precio_max")
 
+        if tipo_operacion:
+            properties = properties.filter(tipo_operacion=tipo_operacion)
         if region:
             properties = properties.filter(direccion__comuna__nombre_region=region)
+        if tipo_propiedad:
+            properties = properties.filter(tipo_inmueble=tipo_propiedad)
         if comuna:
             properties = properties.filter(direccion__comuna=comuna)
-        if tipo_inmueble:
-            properties = properties.filter(tipo_inmueble=tipo_inmueble)
         if precio_min:
             properties = properties.filter(precio_mensual__gte=precio_min)
         if precio_max:
             properties = properties.filter(precio_mensual__lte=precio_max)
 
     context = {
-        "form": form,
-        "properties": properties,
+        'form': form,
+        'properties': properties,
     }
-    return render(request, "search_properties.html", context)
+    return render(request, 'search_properties.html', context)
+
+
+
+
 
 
 def get_comunas(request):
@@ -207,6 +249,16 @@ def mis_propiedades(request):
     return render(request, "mis_propiedades.html", {"propiedades": propiedades})
 
 
+# def landing_view(request):
+
+#     featured_properties = Inmueble.objects.all().order_by("-fecha_creacion")[:6]
+
+#     context = {
+#         "featured_properties": featured_properties,
+#     }
+#     return render(request, "landing.html", context)
+
+
 def landing_view(request):
     featured_properties = Inmueble.objects.all().order_by("-fecha_creacion")[:6]
     regiones = Region.objects.all()
@@ -218,7 +270,6 @@ def landing_view(request):
         "tipos_inmueble": tipos_inmueble,
     }
     return render(request, "landing.html", context)
-
 
 def login_view(request):
     if request.method == "POST":
