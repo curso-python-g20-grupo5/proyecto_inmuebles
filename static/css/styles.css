@@ -15,7 +15,7 @@ body {
 /* Navigation */
 .navbar {
     background-color: white;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
@@ -34,6 +34,14 @@ body {
 
 .nav-link:hover {
     color: var(--secondary-color);
+}
+
+.navbar-logo {
+    width: 180px;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    display: block;
 }
 
 /* Buttons */
