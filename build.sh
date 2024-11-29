@@ -10,3 +10,12 @@ python manage.py collectstatic --no-input
 
 # Apply any outstanding database migrations
 python manage.py migrate
+
+
+# Load fixtures in the correct order
+python manage.py loaddata gestion_inmuebles/fixtures/regiones.json
+python manage.py loaddata gestion_inmuebles/fixtures/comunas.json
+python manage.py loaddata gestion_inmuebles/fixtures/tipos_inmueble.json
+python manage.py loaddata gestion_inmuebles/fixtures/usuarios_perfiles.json
+python manage.py loaddata gestion_inmuebles/fixtures/inmuebles.jsonjson
+
