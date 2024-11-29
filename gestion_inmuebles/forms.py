@@ -121,7 +121,6 @@ class InmuebleForm(forms.ModelForm):
     # Campos para Direccion
     ubicacion = forms.CharField(max_length=200, label="Dirección")
     comuna = forms.ModelChoiceField(queryset=Comuna.objects.all(), label="Comuna")
-    region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Region")
 
     # Campos para Caracteristicas
     m2_construidos = forms.FloatField(label="M² construidos")
@@ -170,10 +169,13 @@ class InmuebleForm(forms.ModelForm):
             inmueble.propietario = user
 
         if commit:
-            direccion = Direccion.objects.create(
-                ubicacion=self.cleaned_data["ubicacion"],
-                comuna=self.cleaned_data["comuna"],
-                region=self.cleaned_data["region"],
+            # Actualizar la dirección existente si ya existe
+            direccion, created = Direccion.objects.get_or_create(
+                inmueble=inmueble,
+                defaults={
+                    "ubicacion": self.cleaned_data["ubicacion"],
+                    "comuna": self.cleaned_data["comuna"],
+                },
             )
             direccion.ubicacion = self.cleaned_data["ubicacion"]
             direccion.comuna = self.cleaned_data["comuna"]

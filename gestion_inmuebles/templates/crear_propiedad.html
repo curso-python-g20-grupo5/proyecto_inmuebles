@@ -88,13 +88,6 @@
                                         <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>{{ label }}</option>
                                     {% endfor %}
                                 </select>
-                            {% elif field.name == 'region' %}
-                                <select name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-select {% if field.errors %}is-invalid{% endif %}">
-                                    <option value="">Seleccione una región</option>
-                                    {% for value, label in field.field.choices %}
-                                        <option value="{{ value }}" {% if value == field.value %}selected{% endif %}>{{ label }}</option>
-                                    {% endfor %}
-                                </select>
                             {% else %}
                                 <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-control {% if field.errors %}is-invalid{% endif %}" value="{{ field.value|default:'' }}">
                             {% endif %}
@@ -118,5 +111,4 @@
     </div>
 </div>
 {% endblock %}
-
 
