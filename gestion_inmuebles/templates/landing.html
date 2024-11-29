@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}G3 Propiedades - Tu plataforma inmobiliaria de confianza{% endblock %}
-
+{% load custom_filters %}
 {% block extra_css %}
 <style>
     /* Hero Section */
@@ -159,14 +159,242 @@
                             </div>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Rest of the content... -->
+<!-- Property Carousel -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Propiedades Destacadas</h6>
+            <h2 class="section-title">Descubre Nuestras Mejores Ofertas</h2>
+        </div>
+
+        <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for property in featured_properties %}
+                    {% if forloop.first %}
+                        <div class="carousel-item active">
+                    {% endif %}
+                    {% if forloop.counter0|divisibleby:3 and not forloop.first %}
+                        </div>
+                        <div class="carousel-item">
+                    {% endif %}
+                    <div class="col-md-4 float-start">
+                        <div class="card property-slide mx-2">
+                        <img src="{% if property.imagen %}{{ property.imagen.url }}{% else %}{% static 'images/placeholder-property.jpg' %}{% endif %}" class="card-img-top" alt="{{ property.nombre }}" style="height: 200px;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ property.nombre }}</h5>
+                                <p class="text-muted mb-2">{{ property.direccion.comuna }}, {{ property.direccion.comuna.nombre_region }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="h5 mb-0">${{ property.precio_mensual|chilean_peso }}</span>
+                                    <a href="{% url 'property_detail' property.id %}" class="btn btn-outline-primary">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.last %}
+                        </div>
+                    {% endif %}
+                {% empty %}
+                    <div class="carousel-item active">
+                        <p class="text-center">No hay propiedades destacadas disponibles en este momento.</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section" id="servicios">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Nuestros Servicios</h6>
+            <h2 class="section-title text-white">¿Por qué elegirnos?</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-people service-icon"></i>
+                    <div class="stats-number">+100</div>
+                    <div class="stats-label">Agentes Inmobiliarios</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-globe service-icon"></i>
+                    <div class="stats-number">+15</div>
+                    <div class="stats-label">Regiones Cubiertas</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-trophy service-icon"></i>
+                    <div class="stats-number">+25</div>
+                    <div class="stats-label">Años de Experiencia</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <i class="bi bi-check-circle service-icon"></i>
+                    <div class="stats-number">+3500</div>
+                    <div class="stats-label">Contratos Cerrados</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-6">
+                <div class="service-card">
+                    <h3>¿Estás vendiendo?</h3>
+                    <p>Obtén una valoración precisa de tu propiedad y accede a nuestra red de compradores calificados.</p>
+                    <a href="{% url 'crear_propiedad' %}" class="btn btn-primary">Publicar Propiedad</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="service-card">
+                    <h3>¿Buscas propiedad?</h3>
+                    <p>Encuentra la propiedad perfecta con nuestra búsqueda personalizada y asesoramiento experto.</p>
+                    <a href="{% url 'search_properties' %}" class="btn btn-primary">Buscar Propiedades</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Regions Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="section-subtitle">Principales Regiones</h6>
+            <h2 class="section-title">Explora por Ubicación</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/santiago.jpg' %}" alt="Región Metropolitana">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Región Metropolitana</h3>
+                            <a href="{% url 'search_properties' %}?region=7" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/valparaiso.jpg' %}" alt="Valparaíso">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Valparaíso</h3>
+                            <a href="{% url 'search_properties' %}?region=6" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="region-card">
+                    <img src="{% static 'images/concepcion.jpg' %}" alt="Concepción">
+                    <div class="region-overlay">
+                        <div>
+                            <h3 class="h4 mb-2">Concepción</h3>
+                            <a href="{% url 'search_properties' %}?region=11" class="btn btn-primary">Ver Propiedades</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section py-5" id="contacto">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <h6 class="section-subtitle">Contáctanos</h6>
+                <h2 class="section-title">¿Listo para comenzar?</h2>
+                <p class="mb-4">Completa el formulario y uno de nuestros expertos te contactará a la brevedad.</p>
+
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control" rows="4" placeholder="Mensaje"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h6 class="section-subtitle">FAQ</h6>
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+
+                <div class="accordion mt-4" id="faqAccordion">
+                    <div class="accordion-item faq-item">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                ¿Cómo puedo publicar mi propiedad?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Regístrate como arrendador/vendedor y sigue los pasos para crear tu anuncio. Podrás agregar fotos, descripción y detalles de tu propiedad.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item mt-3">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                ¿Cuál es el costo del servicio?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                La publicación básica es gratuita. Contamos con planes premium que ofrecen mayor visibilidad y características adicionales.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item faq-item mt-3">
+                        <h2 class="accordion-header">
+                            <button class="faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                ¿Cómo contacto a un vendedor/arrendador?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                En cada anuncio encontrarás un botón de contacto. Deberás estar registrado para poder enviar mensajes a los propietarios.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 
