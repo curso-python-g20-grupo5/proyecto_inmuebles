@@ -12,7 +12,6 @@ urlpatterns = [
     path("accounts/login/", views.login_view, name="login"),
     path("logout/", views.logout_view, name="logout"),
     path("register/", views.register, name="register"),
-    path("", views.home, name="home"),
     path("accounts/profile/", views.profile_view, name="profile"),
     path("search/", views.search_properties, name="search_properties"),
     path("property/<int:pk>/", views.property_detail, name="property_detail"),

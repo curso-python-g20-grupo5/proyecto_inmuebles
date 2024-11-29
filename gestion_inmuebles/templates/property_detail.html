@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load custom_filters %}
 {% block title %}{{ property.nombre }} - G3 Propiedades{% endblock %}
 
 {% block extra_css %}
@@ -133,7 +133,7 @@
         <div class="col-lg-4">
             <div class="reservation-form">
                 <h3 class="h4 mb-4">Información de Arriendo</h3>
-                <p class="property-price">${{ property.precio_mensual }} <span class="fs-6 text-muted">/mes</span></p>
+                <p class="property-price">${{ property.precio_mensual|chilean_peso }} <span class="fs-6 text-muted">/mes</span></p>
                 <hr>
                 {% if user.is_authenticated and user.profile.user_type == 'arrendador' %}
                     {% if reserva %}

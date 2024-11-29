@@ -1,41 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
+
 
 {% block content %}
-    <section class="property-header text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Tipos de Propiedades</h1>
-
-        </div>
-    </section>
+   <section class="property-header text-center">
+    <div class="container">
+        <h1 class="display-4 fw-bold my-4">Tipos de Propiedades</h1>
+        <form method="get" action="{% url 'search_properties' %}">
+            <div class="form-group">
+                <label for="region">Filtrar por Región:</label>
+                <select name="region" id="region" class="form-control">
+                    <option value="">Todas las Regiones</option>
+                    {% for region in regions %}
+                        <option value="{{ region.id }}" {% if request.GET.region == region.nombre_region %}selected{% endif %}>{{ region.nombre_region }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Filtrar</button>
+        </form>
+    </div>
+</section>
 
     <div class="container py-4">
-        <!-- Mostrar datos para depuración -->
-        <!--<pre>{{ properties }}</pre>-->
+
 
         <div class="row g-4">
             {% for propiedad in properties %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card property-card">
                         {% if propiedad.imagen %}
                             <img src="{{ propiedad.imagen.url }}" class="property-image" alt="{{ propiedad.nombre }}">
                         {% else %}
-                            <img src="{% static 'images/default-property.jpg' %}" class="property-image" alt="Imagen no disponible">
+                            <img src="{% static 'images/placeholder-property.jpg' %}" class="property-image" alt="Imagen no disponible">
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ propiedad.nombre }}</h5>
-                            <p class="card-text">{{ propiedad.descripcion }}</p>
-                            <p class="property-price">${{ propiedad.precio_mensual }}</p>
-                            <a href="#" class="btn btn-outline-primary">Ver Detalles</a>
-
+                            <p class="card-text">
+                                <i class="bi bi-house-door me-2"></i>
+                                {{ propiedad.descripcion }}</p>
+                            <p class="property-location">
+                                <i class="bi bi-geo-alt-fill me-2"></i>
+                                 {{ propiedad.direccion.comuna }}, {{ propiedad.direccion.comuna.nombre_region }}, {{ propiedad.direccion.nombre_region }}
+                            </p>
+                            <p class="property-price">
+                                <i class="bi bi-currency-dollar me-2"></i>
+                                {{ propiedad.precio_mensual|chilean_peso}}</p>
+                            <a href="{% url 'property_detail' propiedad.id %}" class="btn btn-outline-primary">Ver Detalles</a>
                         </div>
                     </div>
                 </div>
-            {% empty %}
-                <div class="col-12">
-                    <p class="text-center">No se encontraron propiedades que coincidan con los criterios de búsqueda.</p>
+           {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    No se encontraron propiedades que coincidan con los criterios de búsqueda.
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
         </div>
     </div>
 {% endblock %}
