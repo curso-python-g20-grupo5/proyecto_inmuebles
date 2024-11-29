@@ -17,5 +17,5 @@ python manage.py loaddata gestion_inmuebles/fixtures/regiones.json
 python manage.py loaddata gestion_inmuebles/fixtures/comunas.json
 python manage.py loaddata gestion_inmuebles/fixtures/tipos_inmueble.json
 python manage.py loaddata gestion_inmuebles/fixtures/usuarios_perfiles.json
-python manage.py loaddata gestion_inmuebles/fixtures/inmuebles.jsonjson
+python manage.py loaddata gestion_inmuebles/fixtures/inmuebles.json
 
