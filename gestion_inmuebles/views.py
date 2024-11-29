@@ -24,9 +24,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect(
-                "home"
-            )  # Redirige a la página de inicio después del registro
+            return redirect("/")  # Redirige a la página de inicio después del registro
     else:
         form = UserCreationForm()
 
